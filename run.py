@@ -18,6 +18,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pp3_work_project')
 
+yes_no = ['yes', 'no']
+
 def start():
     print('Hello, welcome to laundry booking!\n')
     print('Please type in your name to book a time,\nor to see current bookings.\n')
@@ -65,6 +67,7 @@ def mainMenu():
       
 #Book a day
 def choose_a_day():
+    os.system('clear')
     print('Choose a day:\n')
     days = SHEET.worksheet('laundry_days').get_all_values()
 
@@ -79,23 +82,17 @@ def choose_a_day():
             print('Not a valid number')
             
         if choice == 1:
-            monday()            
-            break
+            monday()                     
         elif choice == 2:
-            tuesday()
-            break
+            tuesday()      
         elif choice == 3:
-            wednesday()
-            break
+            wednesday()      
         elif choice == 4:
-            thursday()
-            break
+            thursday()           
         elif choice == 5:
-            friday()
-            break
+            friday()          
         elif choice == 6:
             saturday()
-            break
         elif choice == 7:
             sunday()
     
@@ -115,6 +112,7 @@ def log_out():
 
 #Times
 def times():
+    os.system('clear')
     print('1) 7.00 AM - 11.00 AM')
     print('2) 11.00 AM - 3.00 PM')
     print('3) 3.00 PM - 7.00 PM')
@@ -151,9 +149,25 @@ def sunday():
     print('Please choose a time: ')
     times()
 
+def summary():
+    os.system('clear')
+    print('This is the day\n')
+    print('Would you like to confirm, and go back to Start?')
+    answer = input("(yes / no)\n")
+    if answer == 'yes':
+        os.system('clear')
+        start()
+    elif answer == 'no':
+        print('ok stay here')
+
 
 def main():
     start_up = start()
+    laundry_times = times()
+    summary_end = summary()
     menu = mainMenu()
+    
+    
+    # back_to = start()
 
 main()
