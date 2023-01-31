@@ -104,8 +104,23 @@ def log_out():
 
 def monday():
     print('You want to to the laundry on monday')
+    print('Please choose a time: ')
+    time = SHEET.get_worksheet('laundry_times').get_all_values()
+    for time in times:
+        print(time)
 def tuesday():
     print('You want to to the laundry on tuesday')
+def wednesday():
+    print('You want to to the laundry on wednesday')
+def thursday():
+    print('You want to to the laundry on thursday')
+def friday():
+    print('You want to to the laundry on friday')
+def saturday():
+    print('You want to to the laundry on saturday')
+def sunday():
+    print('You want to to the laundry on sunday')
+
 
 
 
