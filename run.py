@@ -3,6 +3,7 @@ import colorama
 import os
 import datetime
 from google.oauth2.service_account import Credentials
+from colorama import Fore
 
 
 
@@ -18,10 +19,23 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pp3_work_project')
 
 def start():
-    print('Hello, welcome to laundry booking!')
-    print('Please login to book a time,\nor to see your current bookings.')
-    print('Enjoy your day!')
+    print('Hello, welcome to laundry booking!\n')
+    print('Please type in your name to book a time,\nor to see current bookings.\n')
+    print('____________\n')
+    print(Fore.GREEN + 'Enjoy your day!')
+    print(Fore.WHITE + '____________\n')
 
+    print('Enter your name: ')
+    name = input()
+
+    def worksheet_name_update(data, worksheet):
+        worksheet_to_update = SHEET.worksheet(worksheet)
+        worksheet_to_update.append_row(data)
+
+    
+
+def mainMenu():
+    os.system('clear')
     x = datetime.datetime.now()
     print('____________\n')
     print("Date and time of today:")
@@ -29,11 +43,10 @@ def start():
     print(x.strftime("%x"))
     print('____________\n')
 
-def mainMenu():
     print('MAIN MENU \n')
     print('1) Book a Time')
-    print('2) Show my Booking')
-    print('3) Log Out\n')   
+    print('2) Show all current Bookings')
+    print('00) Back to Start\n')   
     while True:
         try:
             choice = int(input('Type in number to choose an option: \n'))
@@ -46,7 +59,7 @@ def mainMenu():
         elif choice == 2:
             show_my_booking()
             break
-        elif choice == 3:
+        elif choice == 00:
             log_out()
 
       
@@ -57,6 +70,7 @@ def choose_a_day():
 
     for day in days:
         print(day)
+        
 
     while True:
         try:
@@ -84,11 +98,9 @@ def choose_a_day():
             break
         elif choice == 7:
             sunday()
+    
 
         
-
-
-
 #Show my bookings menu
 def show_my_booking():
     print('Your bookings')
@@ -96,35 +108,52 @@ def show_my_booking():
 #Log out
 def log_out():
     os.system('clear')
-    from colorama import Fore
     print(Fore.RED + '\nYou are logged out!')
-    print(Fore.WHITE +'____________\n')    
+    print(Fore.WHITE + '____________\n')    
     start()
     mainMenu()
 
+#Times
+def times():
+    print('1) 7.00 AM - 11.00 AM')
+    print('2) 11.00 AM - 3.00 PM')
+    print('3) 3.00 PM - 7.00 PM')
+    print('4) 7.00 PM - 10.00 PM')
+
+#Days
 def monday():
-    print('You want to to the laundry on monday')
+    print('\nYou want to do the laundry on Monday')
     print('Please choose a time: ')
-    time = SHEET.get_worksheet('laundry_times').get_all_values()
-    for time in times:
-        print(time)
+    times()
+
 def tuesday():
-    print('You want to to the laundry on tuesday')
+    print('\nYou want to to the laundry on Tuesday')
+    print('Please choose a time: ')
+    times()
 def wednesday():
-    print('You want to to the laundry on wednesday')
+    print('\nYou want to to the laundry on Wednesday')
+    print('Please choose a time: ')
+    times()
 def thursday():
-    print('You want to to the laundry on thursday')
+    print('\nYou want to to the laundry on Thursday')
+    print('Please choose a time: ')
+    times()
 def friday():
-    print('You want to to the laundry on friday')
+    print('\nYou want to to the laundry on Friday')
+    print('Please choose a time: ')
+    times()
 def saturday():
-    print('You want to to the laundry on saturday')
+    print('\nYou want to to the laundry on Saturday')
+    print('Please choose a time: ')
+    times()
 def sunday():
-    print('You want to to the laundry on sunday')
+    print('\nYou want to to the laundry on Sunday')
+    print('Please choose a time: ')
+    times()
 
 
+def main():
+    start_up = start()
+    menu = mainMenu()
 
-
-start()
-mainMenu()
-
-
+main()
